@@ -91,7 +91,7 @@ class PathdreamerModel(object):
     if config.ckpt_path is not None:
       ckpt_path = config.ckpt_path
       ckpt = tf.train.Checkpoint(model=self.model)
-      status = ckpt.restore(ckpt_path)
+      status = ckpt.restore(ckpt_path).expect_partial()
       status.assert_existing_objects_matched()
       print(f'Restored from {ckpt_path}')
     else:
@@ -108,7 +108,7 @@ class PathdreamerModel(object):
     if config.spade_ckpt_path is not None:
       spade_ckpt_path = config.spade_ckpt_path
       spade_ckpt = tf.train.Checkpoint(ema_generator=self.spade_model)
-      status = spade_ckpt.restore(spade_ckpt_path)
+      status = spade_ckpt.restore(spade_ckpt_path).expect_partial()
       status.assert_existing_objects_matched()
       print(f'Restored SPADE from {spade_ckpt_path}')
     else:

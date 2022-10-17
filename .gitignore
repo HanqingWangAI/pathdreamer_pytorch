@@ -1,0 +1,4 @@
+data
+debug_logs
+*.pyc
+__pycache__
